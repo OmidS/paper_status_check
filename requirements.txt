@@ -1,0 +1,9 @@
+# Crawler
+scipy
+requests
+numerizer
+selenium
+webdriver-manager
+beautifulsoup4 # For parsing html
+lxml # For parsing xml
+pyperclip # To copy and past emoji's into selenium fields
