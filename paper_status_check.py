@@ -37,6 +37,7 @@ class NatureCrawler():
         self.snapshot_dir = snapshot_dir
         self.status_dir = status_dir
         self.take_screenshots = take_screenshots
+        # print(os.environ)
         if username is None:
             username = os.environ.get('NATURE_USERNAME', '')
         if password is None:
@@ -88,6 +89,8 @@ class NatureCrawler():
                 options.add_argument('--no-sandbox')
             options.add_argument('--disable-dev-shm-usage')
             self.browser = webdriver.Chrome(service=ChromeService(driver_path), options=options)
+        else:
+            raise(Exception(f'Selenium driver {self.driver} not supported'))
         if implicit_wait is None:
             implicit_wait = int(os.environ.get('SELENIUM_WAIT', '30'))
         self.implicit_wait = implicit_wait
@@ -170,6 +173,11 @@ class NatureCrawler():
         self.browser.implicitly_wait(0.5) # Wait less since this often is not there
         try:
             lm_link = self.browser.find_element(By.PARTIAL_LINK_TEXT, 'OK')
+            lm_link.click()
+        except Exception as e:
+            print(e)
+        try:
+            lm_link = self.browser.find_element(By.CSS_SELECTOR, 'button[data-cc-action="accept"]')
             lm_link.click()
         except Exception as e:
             print(e)
