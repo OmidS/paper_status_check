@@ -174,11 +174,13 @@ class NatureCrawler():
         try:
             lm_link = self.browser.find_element(By.PARTIAL_LINK_TEXT, 'OK')
             lm_link.click()
+            logger.info(f'Accepted cookies')
         except Exception as e:
             print(e)
         try:
             lm_link = self.browser.find_element(By.CSS_SELECTOR, 'button[data-cc-action="accept"]')
             lm_link.click()
+            logger.info(f'Accepted cookies')
         except Exception as e:
             print(e)
         self.browser.implicitly_wait(self.implicit_wait) # Wait for up to 10s when looking for DOM elements
